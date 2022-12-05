@@ -1,23 +1,15 @@
+const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
 
-    mode: 'development',
-
     entry: './src/index.js',
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js'
-    },
-
-    devServer: {
-        port: 3000
-    },
-
-    resolve: {
-        extensions: ['.js', '.jsx']
+        filename: 'bundle.js',
+        publicPath: '/'
     },
 
     module: {
@@ -26,9 +18,28 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 use: ['babel-loader'],
                 exclude: /node_modules/
+            },
+            {
+                test: /\.(png|svg|jpg|gif|jpeg|webp)$/, use: {
+                  loader: 'file-loader',
+                  options: { name: '[name].[ext]' }
+                }
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+             },
+             {
+                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+                use: ['file-loader']
             }
         ]
     },
+
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
+
 
     plugins: [
         new HtmlWebpackPlugin({
