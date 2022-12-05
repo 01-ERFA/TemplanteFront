@@ -6,4 +6,4 @@ history.txt
 
 dist
 
-.env.example
+!.env.example
