@@ -1,8 +1,9 @@
+.*
+
 node_modules
 
 history.txt
 
 dist
 
-
-.env
+.env.example
